@@ -8,7 +8,7 @@ These are docker images for [Gitea](https://github.com/go-gitea/gitea) running o
 
 ## Usage
 
-```
+```bash
 docker run -ti \
   --name gitea \
   webhippie/gitea:latest
