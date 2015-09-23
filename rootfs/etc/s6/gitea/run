@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -f ./setup ]
+then
+  source ./setup
+fi
+
+STARTCMD="/usr/bin/gosu git /usr/bin/gitea web -c /etc/gitea/gitea.ini"
+exec ${STARTCMD}

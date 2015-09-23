@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -f ./setup ]
+then
+  source ./setup
+fi
+
+STARTCMD="/usr/sbin/sshd -D"
+exec ${STARTCMD}

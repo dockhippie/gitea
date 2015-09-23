@@ -1,0 +1,24 @@
+Port 22
+Protocol 2
+
+HostKey /etc/ssh/keys/ssh_host_ed25519_key
+HostKey /etc/ssh/keys/ssh_host_rsa_key
+HostKey /etc/ssh/keys/ssh_host_dsa_key
+HostKey /etc/ssh/keys/ssh_host_ecdsa_key
+
+AuthorizedKeysFile .ssh/authorized_keys
+
+UseDNS no
+AllowAgentForwarding no
+AllowTcpForwarding no
+PrintMotd no
+PrintLastLog no
+
+PermitRootLogin no
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+PermitEmptyPasswords no
+
+Banner none
+Subsystem sftp /usr/lib/ssh/sftp-server
+UsePrivilegeSeparation sandbox

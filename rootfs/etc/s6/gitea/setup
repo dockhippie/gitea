@@ -1,0 +1,647 @@
+#!/bin/bash
+
+if [ ! -d /var/lib/gitea ]
+then
+  mkdir -p /var/lib/gitea
+fi
+
+if [ ! -d /var/log/gitea ]
+then
+  mkdir -p /var/log/gitea
+fi
+
+if [ ! -d /usr/share/gitea ]
+then
+  mkdir -p /usr/share/gitea
+fi
+
+chown -R git:git \
+  /var/lib/gitea \
+  /var/log/gitea \
+  /usr/share/gitea \
+  /etc/gitea
+
+declare -x GITEA_APP_NAME
+declare -x GITEA_RUN_MODE
+declare -x GITEA_SERVER_PROTOCOL
+declare -x GITEA_SERVER_DOMAIN
+declare -x GITEA_SERVER_ADDR
+declare -x GITEA_SERVER_PORT
+declare -x GITEA_SSH_DISABLE
+declare -x GITEA_SSH_PORT
+declare -x GITEA_OFFLINE_MODE
+declare -x GITEA_ROUTERLOG_DISABLE
+declare -x GITEA_CERT_FILE
+declare -x GITEA_KEY_FILE
+declare -x GITEA_GZIP_ENABLE
+declare -x GITEA_LANDING_PAGE
+declare -x GITEA_DATABASE_TYPE
+declare -x GITEA_REGISTER_CONFIRM
+declare -x GITEA_DISABLE_REGISTER
+declare -x GITEA_REQUIRE_SINGIN
+declare -x GITEA_CACHE_AVATAR
+declare -x GITEA_NOTIFY_MAIL
+declare -x GITEA_REVERSE_PROXY_AUTH
+declare -x GITEA_REVERSE_PROXY_REGISTER
+declare -x GITEA_DISABLE_KEYSIZE_CHECK
+declare -x GITEA_WEBHOOK_QUEUE_LENGTH
+declare -x GITEA_WEBHOOK_DELIVER_TIMEOUT
+declare -x GITEA_WEBHOOK_SKIP_VERIFY
+declare -x GITEA_MAILER_ENABLED
+declare -x GITEA_MAILER_SUBJECT
+declare -x GITEA_MAILER_HOST
+declare -x GITEA_MAILER_HELO_DISABLE
+declare -x GITEA_MAILER_HELO_HOST
+declare -x GITEA_MAILER_SKIP_VERIFY
+declare -x GITEA_MAILER_USE_CERT
+declare -x GITEA_MAILER_CERT_FILE
+declare -x GITEA_MAILER_KEY_FILE
+declare -x GITEA_MAILER_FROM
+declare -x GITEA_MAILER_USERNAME
+declare -x GITEA_MAILER_PASSWORD
+declare -x GITEA_OAUTH_ENABLED
+declare -x GITEA_GITHUB_ENABLED
+declare -x GITEA_GITHUB_CLIENT
+declare -x GITEA_GITHUB_SECRET
+declare -x GITEA_GITHUB_SCOPES
+declare -x GITEA_GITHUB_AUTH
+declare -x GITEA_GITHUB_TOKEN
+declare -x GITEA_GOOGLE_ENABLED
+declare -x GITEA_GOOGLE_CLIENT
+declare -x GITEA_GOOGLE_SECRET
+declare -x GITEA_GOOGLE_SCOPES
+declare -x GITEA_GOOGLE_AUTH
+declare -x GITEA_GOOGLE_TOKEN
+declare -x GITEA_QQ_ENABLED
+declare -x GITEA_QQ_CLIENT
+declare -x GITEA_QQ_SECRET
+declare -x GITEA_QQ_SCOPES
+declare -x GITEA_QQ_AUTH
+declare -x GITEA_QQ_TOKEN
+declare -x GITEA_WEIBO_ENABLED
+declare -x GITEA_WEIBO_CLIENT
+declare -x GITEA_WEIBO_SECRET
+declare -x GITEA_WEIBO_SCOPES
+declare -x GITEA_WEIBO_AUTH
+declare -x GITEA_WEIBO_TOKEN
+declare -x GITEA_CACHE_ADAPTER
+declare -x GITEA_CACHE_HOST
+declare -x GITEA_SESSION_PROVIDER
+declare -x GITEA_SESSION_CONFIG
+declare -x GITEA_COOKIE_NAME
+declare -x GITEA_COOKIE_SECURE
+declare -x GITEA_COOKIE_ENABLE
+declare -x GITEA_GC_INTERVAL
+declare -x GITEA_SESSION_LIFETIME
+declare -x GITEA_PICTURE_SERVICE
+declare -x GITEA_GRAVATAR_DISABLE
+declare -x GITEA_GRAVATAR_SOURCE
+declare -x GITEA_ATTACHMENT_TYPES
+declare -x GITEA_ATTACHMENT_SIZE
+declare -x GITEA_ATTACHMENT_FILES
+declare -x GITEA_TIME_FORMAT
+declare -x GITEA_LOG_LEVEL
+declare -x GITEA_GITFSCK_ENABLE
+declare -x GITEA_GITFSCK_INTERVAL
+declare -x GITEA_GITFSCK_ARGS
+declare -x GITEA_FOOTER_BRANDING
+declare -x GITEA_INSTALL_LOCK
+declare -x GITEA_LOGIN_REMEMBER
+declare -x GITEA_COOKIE_USERNAME
+declare -x GITEA_COOKIE_REMEMBER
+declare -x GITEA_REVERSE_PROXY_USER
+declare -x GITEA_SECRET_KEY
+
+if [ -z "${GITEA_APP_NAME}" ]
+then
+  GITEA_APP_NAME="Gitea"
+fi
+
+if [ -z "${GITEA_RUN_MODE}" ]
+then
+  GITEA_RUN_MODE="prod"
+fi
+
+if [ -z "${GITEA_SERVER_PROTOCOL}" ]
+then
+  GITEA_SERVER_PROTOCOL="http"
+fi
+
+if [ -z "${GITEA_SERVER_DOMAIN}" ]
+then
+  GITEA_SERVER_DOMAIN="localhost"
+fi
+
+if [ -z "${GITEA_SERVER_ADDR}" ]
+then
+  GITEA_SERVER_ADDR="0.0.0.0"
+fi
+
+if [ -z "${GITEA_SERVER_PORT}" ]
+then
+  GITEA_SERVER_PORT="3000"
+fi
+
+if [ -z "${GITEA_SSH_DISABLE}" ]
+then
+  GITEA_SSH_DISABLE="false"
+fi
+
+if [ -z "${GITEA_SSH_PORT}" ]
+then
+  GITEA_SSH_PORT="22"
+fi
+
+if [ -z "${GITEA_OFFLINE_MODE}" ]
+then
+  GITEA_OFFLINE_MODE="true"
+fi
+
+if [ -z "${GITEA_ROUTERLOG_DISABLE}" ]
+then
+  GITEA_ROUTERLOG_DISABLE="false"
+fi
+
+if [ -z "${GITEA_GZIP_ENABLE}" ]
+then
+  GITEA_GZIP_ENABLE="false"
+fi
+
+if [ -z "${GITEA_LANDING_PAGE}" ]
+then
+  GITEA_LANDING_PAGE="home"
+fi
+
+if [ -z "${GITEA_REGISTER_CONFIRM}" ]
+then
+  GITEA_REGISTER_CONFIRM="false"
+fi
+
+if [ -z "${GITEA_DISABLE_REGISTER}" ]
+then
+  GITEA_DISABLE_REGISTER="false"
+fi
+
+if [ -z "${GITEA_REQUIRE_SINGIN}" ]
+then
+  GITEA_REQUIRE_SINGIN="false"
+fi
+
+if [ -z "${GITEA_CACHE_AVATAR}" ]
+then
+  GITEA_CACHE_AVATAR="false"
+fi
+
+if [ -z "${GITEA_NOTIFY_MAIL}" ]
+then
+  GITEA_NOTIFY_MAIL="false"
+fi
+
+if [ -z "${GITEA_REVERSE_PROXY_AUTH}" ]
+then
+  GITEA_REVERSE_PROXY_AUTH="false"
+fi
+
+if [ -z "${GITEA_REVERSE_PROXY_REGISTER}" ]
+then
+  GITEA_REVERSE_PROXY_REGISTER="false"
+fi
+
+if [ -z "${GITEA_DISABLE_KEYSIZE_CHECK}" ]
+then
+  GITEA_DISABLE_KEYSIZE_CHECK="false"
+fi
+
+if [ -z "${GITEA_WEBHOOK_QUEUE_LENGTH}" ]
+then
+  GITEA_WEBHOOK_QUEUE_LENGTH="1000"
+fi
+
+if [ -z "${GITEA_WEBHOOK_DELIVER_TIMEOUT}" ]
+then
+  GITEA_WEBHOOK_DELIVER_TIMEOUT="5"
+fi
+
+if [ -z "${GITEA_WEBHOOK_SKIP_VERIFY}" ]
+then
+  GITEA_WEBHOOK_SKIP_VERIFY="false"
+fi
+
+if [ -z "${GITEA_MAILER_ENABLED}" ]
+then
+  GITEA_MAILER_ENABLED="false"
+fi
+
+if [ -z "${GITEA_MAILER_SUBJECT}" ]
+then
+  GITEA_MAILER_SUBJECT="%(APP_NAME)s"
+fi
+
+if [ -z "${GITEA_MAILER_USE_CERT}" ]
+then
+  GITEA_MAILER_USE_CERT="false"
+fi
+
+if [ -z "${GITEA_MAILER_FROM}" ]
+then
+  GITEA_MAILER_FROM="Gitea <gitea@example.com>"
+fi
+
+if [ -z "${GITEA_OAUTH_ENABLED}" ]
+then
+  GITEA_OAUTH_ENABLED="false"
+fi
+
+if [ -z "${GITEA_GITHUB_SCOPES}" ]
+then
+  GITEA_GITHUB_SCOPES="https://api.github.com/user"
+fi
+
+if [ -z "${GITEA_GITHUB_AUTH}" ]
+then
+  GITEA_GITHUB_AUTH="https://github.com/login/oauth/authorize"
+fi
+
+if [ -z "${GITEA_GITHUB_TOKEN}" ]
+then
+  GITEA_GITHUB_TOKEN="https://github.com/login/oauth/access_token"
+fi
+
+if [ -z "${GITEA_GOOGLE_SCOPES}" ]
+then
+  GITEA_GOOGLE_SCOPES="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+fi
+
+if [ -z "${GITEA_GOOGLE_AUTH}" ]
+then
+  GITEA_GOOGLE_AUTH="https://accounts.google.com/o/oauth2/auth"
+fi
+
+if [ -z "${GITEA_GOOGLE_TOKEN}" ]
+then
+  GITEA_GOOGLE_TOKEN="https://accounts.google.com/o/oauth2/token"
+fi
+
+if [ -z "${GITEA_QQ_SCOPES}" ]
+then
+  GITEA_QQ_SCOPES="get_user_info"
+fi
+
+if [ -z "${GITEA_QQ_AUTH}" ]
+then
+  GITEA_QQ_AUTH="https://graph.qq.com/oauth2.0/authorize"
+fi
+
+if [ -z "${GITEA_QQ_TOKEN}" ]
+then
+  GITEA_QQ_TOKEN="https://graph.qq.com/oauth2.0/token"
+fi
+
+if [ -z "${GITEA_WEIBO_SCOPES}" ]
+then
+  GITEA_WEIBO_SCOPES="all"
+fi
+
+if [ -z "${GITEA_WEIBO_AUTH}" ]
+then
+  GITEA_WEIBO_AUTH="https://api.weibo.com/oauth2/authorize"
+fi
+
+if [ -z "${GITEA_WEIBO_TOKEN}" ]
+then
+  GITEA_WEIBO_TOKEN="https://api.weibo.com/oauth2/access_token"
+fi
+
+if [ -z "${GITEA_CACHE_ADAPTER}" ]
+then
+  GITEA_CACHE_ADAPTER="memory"
+fi
+
+if [ -z "${GITEA_SESSION_PROVIDER}" ]
+then
+  GITEA_SESSION_PROVIDER="memory"
+fi
+
+if [ -z "${GITEA_COOKIE_NAME}" ]
+then
+  GITEA_COOKIE_NAME="gitea-session"
+fi
+
+if [ -z "${GITEA_COOKIE_SECURE}" ]
+then
+  GITEA_COOKIE_SECURE="false"
+fi
+
+if [ -z "${GITEA_COOKIE_ENABLE}" ]
+then
+  GITEA_COOKIE_ENABLE="true"
+fi
+
+if [ -z "${GITEA_GC_INTERVAL}" ]
+then
+  GITEA_GC_INTERVAL="86400"
+fi
+
+if [ -z "${GITEA_SESSION_LIFETIME}" ]
+then
+  GITEA_SESSION_LIFETIME="86400"
+fi
+
+if [ -z "${GITEA_PICTURE_SERVICE}" ]
+then
+  GITEA_PICTURE_SERVICE="server"
+fi
+
+if [ -z "${GITEA_GRAVATAR_DISABLE}" ]
+then
+  GITEA_GRAVATAR_DISABLE="false"
+fi
+
+if [ -z "${GITEA_GRAVATAR_SOURCE}" ]
+then
+  GITEA_GRAVATAR_SOURCE="gravatar"
+fi
+
+if [ -z "${GITEA_ATTACHMENT_TYPES}" ]
+then
+  GITEA_ATTACHMENT_TYPES="image/jpeg|image/png"
+fi
+
+if [ -z "${GITEA_ATTACHMENT_SIZE}" ]
+then
+  GITEA_ATTACHMENT_SIZE="32"
+fi
+
+if [ -z "${GITEA_ATTACHMENT_FILES}" ]
+then
+  GITEA_ATTACHMENT_FILES="10"
+fi
+
+if [ -z "${GITEA_TIME_FORMAT}" ]
+then
+  GITEA_TIME_FORMAT="RFC1123"
+fi
+
+if [ -z "${GITEA_LOG_LEVEL}" ]
+then
+  GITEA_LOG_LEVEL="Trace"
+fi
+
+if [ -z "${GITEA_GITFSCK_ENABLE}" ]
+then
+  GITEA_GITFSCK_ENABLE="true"
+fi
+
+if [ -z "${GITEA_GITFSCK_INTERVAL}" ]
+then
+  GITEA_GITFSCK_INTERVAL="24"
+fi
+
+if [ -z "${GITEA_FOOTER_BRANDING}" ]
+then
+  GITEA_FOOTER_BRANDING="false"
+fi
+
+if [ -z "${GITEA_INSTALL_LOCK}" ]
+then
+  GITEA_INSTALL_LOCK="true"
+fi
+
+if [ -z "${GITEA_LOGIN_REMEMBER}" ]
+then
+  GITEA_LOGIN_REMEMBER="7"
+fi
+
+if [ -z "${GITEA_COOKIE_USERNAME}" ]
+then
+  GITEA_COOKIE_USERNAME="gitea-awesome"
+fi
+
+if [ -z "${GITEA_COOKIE_REMEMBER}" ]
+then
+  GITEA_COOKIE_REMEMBER="gitea-remember"
+fi
+
+if [ -z "${GITEA_REVERSE_PROXY_USER}" ]
+then
+  GITEA_REVERSE_PROXY_USER="X-WEBAUTH-USER"
+fi
+
+if [ -z "${GITEA_DATABASE_TYPE}" ]
+then
+  GITEA_DATABASE_TYPE="sqlite3"
+fi
+
+case "${GITEA_DATABASE_TYPE}" in
+  "sqlite3")
+    declare -x GITEA_DATABASE_PATH
+
+    if [ -z "${GITEA_DATABASE_PATH}" ]
+    then
+      GITEA_DATABASE_PATH="/var/lib/gitea/data/gitea.db"
+    fi
+    ;;
+  "tidb")
+    declare -x GITEA_DATABASE_PATH
+
+    if [ -z "${GITEA_DATABASE_PATH}" ]
+    then
+      GITEA_DATABASE_PATH="goleveldb:///var/lib/gitea/data/gitea.db/gitea"
+    fi
+    ;;
+  "mysql")
+    declare -x GITEA_DATABASE_HOST
+    declare -x GITEA_DATABASE_NAME
+    declare -x GITEA_DATABASE_USERNAME
+    declare -x GITEA_DATABASE_PASSWORD
+
+    if [ -z "${GITEA_DATABASE_HOST}" ]
+    then
+      GITEA_DATABASE_HOST="mysql:3306"
+    fi
+
+    if [ -z "${GITEA_DATABASE_NAME}" ]
+    then
+      GITEA_DATABASE_NAME="gitea"
+    fi
+
+    if [ -z "${GITEA_DATABASE_USERNAME}" ]
+    then
+      GITEA_DATABASE_USERNAME="root"
+    fi
+
+    if [ -z "${GITEA_DATABASE_PASSWORD}" ]
+    then
+      GITEA_DATABASE_PASSWORD=""
+    fi
+    ;;
+  "postgres")
+    declare -x GITEA_DATABASE_HOST
+    declare -x GITEA_DATABASE_NAME
+    declare -x GITEA_DATABASE_USERNAME
+    declare -x GITEA_DATABASE_PASSWORD
+    declare -x GITEA_DATABASE_SSLMODE
+
+    if [ -z "${GITEA_DATABASE_HOST}" ]
+    then
+      GITEA_DATABASE_HOST="postgres:5432"
+    fi
+
+    if [ -z "${GITEA_DATABASE_NAME}" ]
+    then
+      GITEA_DATABASE_NAME="gitea"
+    fi
+
+    if [ -z "${GITEA_DATABASE_USERNAME}" ]
+    then
+      GITEA_DATABASE_USERNAME="root"
+    fi
+
+    if [ -z "${GITEA_DATABASE_PASSWORD}" ]
+    then
+      GITEA_DATABASE_PASSWORD=""
+    fi
+
+    if [ -z "${GITEA_DATABASE_SSLMODE}" ]
+    then
+      GITEA_DATABASE_SSLMODE="disable"
+    fi
+    ;;
+esac
+
+if [ -z "${GITEA_GITHUB_ENABLED}" ]
+then
+  GITEA_GITHUB_ENABLED="false"
+fi
+
+if [ "${GITEA_GITHUB_ENABLED}" == "true" ]
+then
+  if [ -z "${GITEA_GITHUB_CLIENT}" ]
+  then
+    echo >&2 "Error: You have to provide GITEA_GITHUB_CLIENT environment variable"
+    /usr/bin/s6-svc -t /etc/s6
+    exit 1
+  fi
+
+  if [ -z "${GITEA_GITHUB_SECRET}" ]
+  then
+    echo >&2 "Error: You have to provide GITEA_GITHUB_SECRET environment variable"
+    /usr/bin/s6-svc -t /etc/s6
+    exit 1
+  fi
+fi
+
+if [ -z "${GITEA_GOOGLE_ENABLED}" ]
+then
+  GITEA_GOOGLE_ENABLED="false"
+fi
+
+if [ "${GITEA_GOOGLE_ENABLED}" == "true" ]
+then
+  if [ -z "${GITEA_GOOGLE_CLIENT}" ]
+  then
+    echo >&2 "Error: You have to provide GITEA_GOOGLE_CLIENT environment variable"
+    /usr/bin/s6-svc -t /etc/s6
+    exit 1
+  fi
+
+  if [ -z "${GITEA_GOOGLE_SECRET}" ]
+  then
+    echo >&2 "Error: You have to provide GITEA_GOOGLE_SECRET environment variable"
+    /usr/bin/s6-svc -t /etc/s6
+    exit 1
+  fi
+fi
+
+if [ -z "${GITEA_QQ_ENABLED}" ]
+then
+  GITEA_QQ_ENABLED="false"
+fi
+
+if [ "${GITEA_QQ_ENABLED}" == "true" ]
+then
+  if [ -z "${GITEA_QQ_CLIENT}" ]
+  then
+    echo >&2 "Error: You have to provide GITEA_QQ_CLIENT environment variable"
+    /usr/bin/s6-svc -t /etc/s6
+    exit 1
+  fi
+
+  if [ -z "${GITEA_QQ_SECRET}" ]
+  then
+    echo >&2 "Error: You have to provide GITEA_QQ_SECRET environment variable"
+    /usr/bin/s6-svc -t /etc/s6
+    exit 1
+  fi
+fi
+
+if [ -z "${GITEA_WEIBO_ENABLED}" ]
+then
+  GITEA_WEIBO_ENABLED="false"
+fi
+
+if [ "${GITEA_WEIBO_ENABLED}" == "true" ]
+then
+  if [ -z "${GITEA_WEIBO_CLIENT}" ]
+  then
+    echo >&2 "Error: You have to provide GITEA_WEIBO_CLIENT environment variable"
+    /usr/bin/s6-svc -t /etc/s6
+    exit 1
+  fi
+
+  if [ -z "${GITEA_WEIBO_SECRET}" ]
+  then
+    echo >&2 "Error: You have to provide GITEA_WEIBO_SECRET environment variable"
+    /usr/bin/s6-svc -t /etc/s6
+    exit 1
+  fi
+fi
+
+if [ -z "${GITEA_SECRET_KEY}" ]
+then
+  if [ -f /var/lib/gitea/secret ]
+  then
+    GITEA_SECRET_KEY=$(cat /var/lib/gitea/secret | head -n1)
+  else
+    GITEA_SECRET_KEY=$(date +%s | sha256sum | base64 | head -c 64 ; echo)
+    echo "${GITEA_SECRET_KEY}" > /var/lib/gitea/secret
+  fi
+fi
+
+if [ -n "${GITEA_MAILER_CERT_FILE}" ]
+then
+  if [ ! -f "${GITEA_MAILER_CERT_FILE}" ]
+  then
+    echo -e "${GITEA_MAILER_CERT_FILE}" >| /tmp/mail.pem
+    GITEA_MAILER_CERT_FILE="/tmp/mail.pem"
+  fi
+fi
+
+if [ -n "${GITEA_MAILER_KEY_FILE}" ]
+then
+  if [ ! -f "${GITEA_MAILER_KEY_FILE}" ]
+  then
+    echo -e "${GITEA_MAILER_KEY_FILE}" >| /tmp/mail.key
+    GITEA_MAILER_KEY_FILE="/tmp/mail.key"
+  fi
+fi
+
+if [ -n "${GITEA_CERT_FILE}" ]
+then
+  if [ ! -f "${GITEA_CERT_FILE}" ]
+  then
+    echo -e "${GITEA_CERT_FILE}" >| /tmp/gitea.key
+    GITEA_CERT_FILE="/tmp/gitea.key"
+  fi
+fi
+
+if [ -n "${GITEA_KEY_FILE}" ]
+then
+  if [ ! -f "${GITEA_KEY_FILE}" ]
+  then
+    echo -e "${GITEA_KEY_FILE}" >| /tmp/gitea.key
+    GITEA_KEY_FILE="/tmp/gitea.key"
+  fi
+fi
+
+envsubst < /etc/gitea/gitea.ini.tmpl > /etc/gitea/gitea.ini
