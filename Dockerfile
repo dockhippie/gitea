@@ -14,7 +14,7 @@ RUN apk update && \
     go \
     openssh && \
   groupadd -r -g 1000 git && \
-  useradd -r -m -d /var/lib/gitea -s /bin/bash -u 1000 -g git git && \
+  useradd -r -m -p '*' -d /var/lib/gitea -s /bin/bash -u 1000 -g git git && \
   git clone -b ${GITEA_BRANCH} ${GITEA_REPO} ${GOPATH}/src/${GITEA_PATH} && \
   cd ${GOPATH}/src/${GITEA_PATH} && \
   go get -d ${GITEA_PATH}/... && \

@@ -5,5 +5,5 @@ then
   source ./setup
 fi
 
-STARTCMD="/usr/sbin/sshd -D"
+STARTCMD="/usr/sbin/sshd -E /var/log/sshd.log -D"
 exec ${STARTCMD}
