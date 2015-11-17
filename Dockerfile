@@ -24,7 +24,6 @@ RUN apk update && \
   rm -r \
     /usr/src/* \
     /usr/pkg/* \
-    /usr/lib/go \
     /usr/bin/go-bindata
 
 VOLUME ["/var/lib/gitea", "/etc/ssh/keys"]
