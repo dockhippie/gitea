@@ -519,14 +519,14 @@ then
   if [ -z "${GITEA_GITHUB_CLIENT}" ]
   then
     echo >&2 "Error: You have to provide GITEA_GITHUB_CLIENT environment variable"
-    /usr/bin/s6-svc -t /etc/s6
+    /bin/s6-svc -t /etc/s6
     exit 1
   fi
 
   if [ -z "${GITEA_GITHUB_SECRET}" ]
   then
     echo >&2 "Error: You have to provide GITEA_GITHUB_SECRET environment variable"
-    /usr/bin/s6-svc -t /etc/s6
+    /bin/s6-svc -t /etc/s6
     exit 1
   fi
 fi
@@ -541,14 +541,14 @@ then
   if [ -z "${GITEA_GOOGLE_CLIENT}" ]
   then
     echo >&2 "Error: You have to provide GITEA_GOOGLE_CLIENT environment variable"
-    /usr/bin/s6-svc -t /etc/s6
+    /bin/s6-svc -t /etc/s6
     exit 1
   fi
 
   if [ -z "${GITEA_GOOGLE_SECRET}" ]
   then
     echo >&2 "Error: You have to provide GITEA_GOOGLE_SECRET environment variable"
-    /usr/bin/s6-svc -t /etc/s6
+    /bin/s6-svc -t /etc/s6
     exit 1
   fi
 fi
@@ -563,14 +563,14 @@ then
   if [ -z "${GITEA_QQ_CLIENT}" ]
   then
     echo >&2 "Error: You have to provide GITEA_QQ_CLIENT environment variable"
-    /usr/bin/s6-svc -t /etc/s6
+    /bin/s6-svc -t /etc/s6
     exit 1
   fi
 
   if [ -z "${GITEA_QQ_SECRET}" ]
   then
     echo >&2 "Error: You have to provide GITEA_QQ_SECRET environment variable"
-    /usr/bin/s6-svc -t /etc/s6
+    /bin/s6-svc -t /etc/s6
     exit 1
   fi
 fi
@@ -585,14 +585,14 @@ then
   if [ -z "${GITEA_WEIBO_CLIENT}" ]
   then
     echo >&2 "Error: You have to provide GITEA_WEIBO_CLIENT environment variable"
-    /usr/bin/s6-svc -t /etc/s6
+    /bin/s6-svc -t /etc/s6
     exit 1
   fi
 
   if [ -z "${GITEA_WEIBO_SECRET}" ]
   then
     echo >&2 "Error: You have to provide GITEA_WEIBO_SECRET environment variable"
-    /usr/bin/s6-svc -t /etc/s6
+    /bin/s6-svc -t /etc/s6
     exit 1
   fi
 fi
