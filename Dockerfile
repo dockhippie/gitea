@@ -10,7 +10,7 @@ ENV GOPATH /usr
 RUN apk update && \
   apk add \
     build-base \
-    go@community \
+    go \
     git \
     openssh && \
   groupadd -r -g 1000 git && \
