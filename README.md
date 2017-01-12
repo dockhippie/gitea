@@ -1,25 +1,25 @@
 # Gitea
 
-[![](https://badge.imagelayers.io/webhippie/gitea:latest.svg)](https://imagelayers.io/?images=webhippie/gitea:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/webhippie/gitea.svg)](https://microbadger.com/images/webhippie/gitea "Get your own image badge on microbadger.com")
 
-These are docker images for [Gitea](https://github.com/go-gitea/gitea) running on an
-[Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/).
-
-
-## Usage
-
-```bash
-docker run -ti \
-  --name gitea \
-  webhippie/gitea:latest
-```
+These are docker images for [Gitea](https://github.com/go-gitea/gitea) running on an [Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/).
 
 
 ## Versions
 
-* [latest](https://github.com/dockhippie/gitea/tree/master)
-  available as ```webhippie/gitea:latest``` at
-  [Docker Hub](https://registry.hub.docker.com/u/webhippie/gitea/)
+* [latest](https://github.com/dockhippie/gitea/tree/master) available as ```webhippie/gitea:latest``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/gitea/)
+
+
+## Volumes
+
+* /var/lib/gitea
+* /etc/ssh/keys
+
+
+## Ports
+
+* 3000
+* 22
 
 
 ## Available environment variables
@@ -59,7 +59,7 @@ ENV GITEA_WEBHOOK_DELIVER_TIMEOUT 5
 ENV GITEA_WEBHOOK_SKIP_VERIFY false
 ENV GITEA_MAILER_ENABLED false
 ENV GITEA_MAILER_SUBJECT $GITEA_APP_NAME
-ENV GITEA_MAILER_HOST 
+ENV GITEA_MAILER_HOST
 ENV GITEA_MAILER_HELO_DISABLE
 ENV GITEA_MAILER_HELO_HOST
 ENV GITEA_MAILER_SKIP_VERIFY
@@ -116,7 +116,7 @@ ENV GITEA_GITFSCK_INTERVAL 24
 ENV GITEA_GITFSCK_ARGS
 ENV GITEA_FOOTER_BRANDING false
 ENV GITEA_INSTALL_LOCK true
-ENV GITEA_LOGIN_REMEMBER 7 
+ENV GITEA_LOGIN_REMEMBER 7
 ENV GITEA_COOKIE_USERNAME gitea-awesome
 ENV GITEA_COOKIE_REMEMBER gitea-remember
 ENV GITEA_REVERSE_PROXY_USER X-WEBAUTH-USER
@@ -127,14 +127,7 @@ ENV GITEA_SECRET_KEY # Generated or provide it
 ## Inherited environment variables
 
 ```bash
-ENV LOGSTASH_ENABLED false
-ENV LOGSTASH_HOST logstash
-ENV LOGSTASH_PORT 5043
-ENV LOGSTASH_CA /etc/ssl/logstash/certs/ca.pem # As string or filename
-ENV LOGSTASH_CERT /etc/ssl/logstash/certs/cert.pem # As string or filename
-ENV LOGSTASH_KEY /etc/ssl/logstash/private/cert.pem # As string or filename
-ENV LOGSTASH_TIMEOUT 15
-ENV LOGSTASH_OPTS
+ENV CRON_ENABLED false
 ```
 
 
@@ -156,5 +149,5 @@ MIT
 ## Copyright
 
 ```
-Copyright (c) 2015 Thomas Boerger <http://www.webhippie.de>
+Copyright (c) 2015-2017 Thomas Boerger <http://www.webhippie.de>
 ```
