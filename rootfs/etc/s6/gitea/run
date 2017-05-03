@@ -5,5 +5,5 @@ then
   source ./setup
 fi
 
-STARTCMD="/usr/bin/gosu git /usr/bin/gitea web -c /etc/gitea/gitea.ini"
+STARTCMD="su-exec git /usr/bin/gitea web -c /etc/gitea/gitea.ini"
 exec ${STARTCMD}
