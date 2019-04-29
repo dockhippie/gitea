@@ -1,18 +1,18 @@
-image: webhippie/gitea:latest
+image: webhippie/gitea:1.8
 manifests:
   -
-    image: webhippie/gitea:latest-amd64
+    image: webhippie/gitea:1.8-amd64
     platform:
       architecture: amd64
       os: linux
   -
-    image: webhippie/gitea:latest-arm64v8
+    image: webhippie/gitea:1.8-arm64v8
     platform:
       architecture: arm64
       os: linux
       variant: v8
   -
-    image: webhippie/gitea:latest-arm32v6
+    image: webhippie/gitea:1.8-arm32v6
     platform:
       architecture: arm
       os: linux
