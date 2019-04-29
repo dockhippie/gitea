@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+declare -x GITEA_U2F_ENABLED
+[[ -z "${GITEA_U2F_ENABLED}" ]] && GITEA_U2F_ENABLED="false"
+
+declare -x GITEA_U2F_APP_ID
+[[ -z "${GITEA_U2F_APP_ID}" ]] && GITEA_U2F_APP_ID="${GITEA_SERVER_ROOT_URL}"
+
+declare -x GITEA_U2F_TRUSTED_FACETS
+[[ -z "${GITEA_U2F_TRUSTED_FACETS}" ]] && GITEA_U2F_TRUSTED_FACETS="${GITEA_SERVER_ROOT_URL}"
