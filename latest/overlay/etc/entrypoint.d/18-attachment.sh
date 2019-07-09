@@ -6,8 +6,8 @@ declare -x GITEA_ATTACHMENT_ENABLED
 declare -x GITEA_ATTACHMENT_PATH
 [[ -z "${GITEA_ATTACHMENT_PATH}" ]] && GITEA_ATTACHMENT_PATH="${GITEA_BASE_PATH}/attachments"
 
-declare -x GITEA_ATTACHMENT_ALOWED_TYPES
-[[ -z "${GITEA_ATTACHMENT_ALOWED_TYPES}" ]] && GITEA_ATTACHMENT_ALOWED_TYPES="image/jpeg|image/png|application/zip|application/gzip"
+declare -x GITEA_ATTACHMENT_ALLOWED_TYPES
+[[ -z "${GITEA_ATTACHMENT_ALLOWED_TYPES}" ]] && GITEA_ATTACHMENT_ALLOWED_TYPES="image/jpeg|image/png|application/zip|application/gzip"
 
 declare -x GITEA_ATTACHMENT_MAX_SIZE
 [[ -z "${GITEA_ATTACHMENT_MAX_SIZE}" ]] && GITEA_ATTACHMENT_MAX_SIZE="5"
