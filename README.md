@@ -9,6 +9,7 @@ These are docker images for [Gitea](https://gitea.io/en-us/) running on an [Alpi
 ## Versions
 
 * [latest](./latest) available as `webhippie/gitea:latest`
+* [1.9](./v1.9) available as `webhippie/gitea:1.9`
 * [1.8](./v1.8) available as `webhippie/gitea:1.8`
 
 

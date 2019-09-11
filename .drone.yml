@@ -39,7 +39,7 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - "refs/pull/**"
+  - refs/pull/**
 
 ---
 kind: pipeline
@@ -82,7 +82,7 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - "refs/pull/**"
+  - refs/pull/**
 
 ---
 kind: pipeline
@@ -125,7 +125,7 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - "refs/pull/**"
+  - refs/pull/**
 
 ---
 kind: pipeline
@@ -155,6 +155,164 @@ depends_on:
 - amd64-latest
 - arm32v6-latest
 - arm64v8-latest
+
+---
+kind: pipeline
+name: amd64-1.9
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: v1.9
+    dockerfile: v1.9/Dockerfile.amd64
+    dry_run: true
+    repo: webhippie/gitea
+    tags: 1.9-amd64
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: v1.9
+    dockerfile: v1.9/Dockerfile.amd64
+    password:
+      from_secret: docker_password
+    repo: webhippie/gitea
+    tags: 1.9-amd64
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - refs/pull/**
+
+---
+kind: pipeline
+name: arm32v6-1.9
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: v1.9
+    dockerfile: v1.9/Dockerfile.arm32v6
+    dry_run: true
+    repo: webhippie/gitea
+    tags: 1.9-arm32v6
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: v1.9
+    dockerfile: v1.9/Dockerfile.arm32v6
+    password:
+      from_secret: docker_password
+    repo: webhippie/gitea
+    tags: 1.9-arm32v6
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - refs/pull/**
+
+---
+kind: pipeline
+name: arm64v8-1.9
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: v1.9
+    dockerfile: v1.9/Dockerfile.arm64v8
+    dry_run: true
+    repo: webhippie/gitea
+    tags: 1.9-arm64v8
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: v1.9
+    dockerfile: v1.9/Dockerfile.arm64v8
+    password:
+      from_secret: docker_password
+    repo: webhippie/gitea
+    tags: 1.9-arm64v8
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - refs/pull/**
+
+---
+kind: pipeline
+name: manifest-1.9
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: manifest
+  pull: always
+  image: plugins/manifest:1
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: v1.9/manifest.tmpl
+    username:
+      from_secret: docker_username
+
+trigger:
+  ref:
+  - refs/heads/master
+
+depends_on:
+- amd64-1.9
+- arm32v6-1.9
+- arm64v8-1.9
 
 ---
 kind: pipeline
@@ -197,7 +355,7 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - "refs/pull/**"
+  - refs/pull/**
 
 ---
 kind: pipeline
@@ -240,7 +398,7 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - "refs/pull/**"
+  - refs/pull/**
 
 ---
 kind: pipeline
@@ -283,7 +441,7 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - "refs/pull/**"
+  - refs/pull/**
 
 ---
 kind: pipeline
@@ -337,5 +495,6 @@ trigger:
 depends_on:
 - manifest-latest
 - manifest-1.8
+- manifest-1.9
 
 ...
