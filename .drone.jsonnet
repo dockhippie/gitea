@@ -14,5 +14,5 @@ local name = 'webhippie/gitea';
   pipeline.build(name, 'v1.8', '1.8', 'arm32v6'),
   pipeline.build(name, 'v1.8', '1.8', 'arm64v8'),
   pipeline.manifest('v1.8', '1.8', ['amd64', 'arm32v6', 'arm64v8']),
-  pipeline.microbadger(['latest', '1.8', '1.9']),
+  pipeline.microbadger(['latest', '1.9', '1.8']),
 ]

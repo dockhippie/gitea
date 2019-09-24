@@ -494,7 +494,7 @@ trigger:
 
 depends_on:
 - manifest-latest
-- manifest-1.8
 - manifest-1.9
+- manifest-1.8
 
 ...
