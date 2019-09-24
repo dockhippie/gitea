@@ -34,6 +34,9 @@ case "${GITEA_DATABASE_TYPE}" in
 
 		declare -x GITEA_DATABASE_SSL
 		[[ -z "${GITEA_DATABASE_SSL}" ]] && GITEA_DATABASE_SSL="false"
+
+		declare -x GITEA_DATABASE_CHARSET
+		[[ -z "${GITEA_DATABASE_CHARSET}" ]] && GITEA_DATABASE_CHARSET="utf8"
 		;;
 	"postgres")
 		declare -x GITEA_DATABASE_HOST
