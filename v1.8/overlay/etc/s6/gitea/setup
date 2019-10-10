@@ -260,6 +260,18 @@ case "${GITEA_SESSION_PROVIDER}" in
     ;;
 esac
 
+if [ -z "${GITEA_SECURITY_INTERNAL_TOKEN}" ]
+then
+  if [ -f ${GITEA_SERVER_APP_DATA_PATH}/internal ]
+  then
+    GITEA_SECURITY_INTERNAL_TOKEN=$(cat ${GITEA_SERVER_APP_DATA_PATH}/internal | head -n1)
+  else
+    echo "> generating internal token"
+    GITEA_SECURITY_INTERNAL_TOKEN=$(gitea generate secret INTERNAL_TOKEN)
+    echo "${GITEA_SECURITY_INTERNAL_TOKEN}" >| ${GITEA_SERVER_APP_DATA_PATH}/internal
+  fi
+fi
+
 if [ -z "${GITEA_SECURITY_SECRET_KEY}" ]
 then
   if [ -f ${GITEA_SERVER_APP_DATA_PATH}/secret ]
@@ -267,7 +279,7 @@ then
     GITEA_SECURITY_SECRET_KEY=$(cat ${GITEA_SERVER_APP_DATA_PATH}/secret | head -n1)
   else
     echo "> generating secret key"
-    GITEA_SECURITY_SECRET_KEY=$(date +%s | sha256sum | base64 | head -c 32 ; echo)
+    GITEA_SECURITY_SECRET_KEY=$(gitea generate secret SECRET_KEY)
     echo "${GITEA_SECURITY_SECRET_KEY}" >| ${GITEA_SERVER_APP_DATA_PATH}/secret
   fi
 fi
@@ -279,7 +291,7 @@ then
     GITEA_SERVER_LFS_JWT_SECRET=$(cat ${GITEA_SERVER_APP_DATA_PATH}/lfs | head -n1)
   else
     echo "> generating lfs jwt"
-    GITEA_SERVER_LFS_JWT_SECRET=$(date +%s | sha256sum | base64 | head -c 32 ; echo)
+    GITEA_SERVER_LFS_JWT_SECRET=$(gitea generate secret LFS_JWT_SECRET)
     echo "${GITEA_SERVER_LFS_JWT_SECRET}" >| ${GITEA_SERVER_APP_DATA_PATH}/lfs
   fi
 fi
@@ -291,7 +303,7 @@ then
     GITEA_OAUTH2_JWT_SECRET=$(cat ${GITEA_SERVER_APP_DATA_PATH}/oauth2 | head -n1)
   else
     echo "> generating oauth2 jwt"
-    GITEA_OAUTH2_JWT_SECRET=$(date +%s | sha256sum | base64 | head -c 32 ; echo)
+    GITEA_OAUTH2_JWT_SECRET=$(gitea generate secret LFS_JWT_SECRET)
     echo "${GITEA_OAUTH2_JWT_SECRET}" >| ${GITEA_SERVER_APP_DATA_PATH}/oauth2
   fi
 fi
