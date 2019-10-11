@@ -2,7 +2,7 @@ FROM webhippie/golang:1.12 as build
 
 ENV GITEA_PATH code.gitea.io/gitea
 ENV GITEA_REPO https://github.com/go-gitea/gitea.git
-ENV GITEA_BRANCH v1.9.3
+ENV GITEA_BRANCH v1.9.4
 
 RUN git clone -b ${GITEA_BRANCH} ${GITEA_REPO} /srv/app/src/${GITEA_PATH} && \
   cd /srv/app/src/${GITEA_PATH} && \
