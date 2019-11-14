@@ -12,7 +12,7 @@ FROM webhippie/alpine:latest-arm32v6
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Gitea" \
-  org.label-schema.version="latest" \
+  org.label-schema.version="1.9" \
   org.label-schema.vendor="Thomas Boerger" \
   org.label-schema.schema-version="1.0"
 
