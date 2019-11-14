@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+declare -x GITEA_GIT_PATH
+[[ -z "${GITEA_GIT_PATH}" ]] && GITEA_GIT_PATH=""
+
 declare -x GITEA_GIT_DISABLE_DIFF_HIGHLIGHT
 [[ -z "${GITEA_GIT_DISABLE_DIFF_HIGHLIGHT}" ]] && GITEA_GIT_DISABLE_DIFF_HIGHLIGHT="false"
 
