@@ -1,0 +1,19 @@
+image: webhippie/gitea:1.11
+manifests:
+  -
+    image: webhippie/gitea:1.11-amd64
+    platform:
+      architecture: amd64
+      os: linux
+  -
+    image: webhippie/gitea:1.11-arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
+  -
+    image: webhippie/gitea:1.11-arm32v6
+    platform:
+      architecture: arm
+      os: linux
+      variant: v6

@@ -1,8 +1,8 @@
-FROM webhippie/golang:1.12-arm64v8 as build
+FROM webhippie/golang:1.12-arm32v6 as build
 
 ENV GITEA_PATH code.gitea.io/gitea
 ENV GITEA_REPO https://github.com/go-gitea/gitea.git
-ENV GITEA_BRANCH release/v1.11
+ENV GITEA_BRANCH v1.11.1
 
 RUN apk update && \
   apk upgrade && \
@@ -11,11 +11,11 @@ RUN apk update && \
   cd /srv/app/src/${GITEA_PATH} && \
   TAGS="bindata sqlite" make generate install
 
-FROM webhippie/alpine:latest-arm64v8
+FROM webhippie/alpine:latest-arm32v6
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Gitea" \
-  org.label-schema.version="latest" \
+  org.label-schema.version="1.11" \
   org.label-schema.vendor="Thomas Boerger" \
   org.label-schema.schema-version="1.0"
 
@@ -35,4 +35,4 @@ RUN apk update && \
   rm -rf /var/cache/apk/*
 
 COPY --from=build /srv/app/bin/gitea /usr/bin/gitea
-COPY ./overlay ./overlay-arm64v8 /
+COPY ./overlay ./overlay-arm32v6 /
