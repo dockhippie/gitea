@@ -1,0 +1,35 @@
+FROM webhippie/golang:1.12-amd64 as build
+
+ENV GITEA_PATH code.gitea.io/gitea
+ENV GITEA_REPO https://github.com/go-gitea/gitea.git
+ENV GITEA_BRANCH v1.8.1
+
+RUN git clone -b ${GITEA_BRANCH} ${GITEA_REPO} /srv/app/src/${GITEA_PATH} && \
+  cd /srv/app/src/${GITEA_PATH} && \
+  TAGS="bindata sqlite" make generate install
+
+FROM webhippie/alpine:latest-amd64
+
+LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
+  org.label-schema.name="Gitea" \
+  org.label-schema.version="1.8" \
+  org.label-schema.vendor="Thomas Boerger" \
+  org.label-schema.schema-version="1.0"
+
+EXPOSE 3000 22
+
+VOLUME ["/var/lib/gitea", "/var/log/gitea", "/usr/share/gitea"]
+WORKDIR /var/lib/gitea
+ENTRYPOINT ["/usr/bin/entrypoint"]
+CMD ["/bin/s6-svscan", "/etc/s6"]
+
+RUN apk update && \
+  apk upgrade && \
+  apk add git git-lfs asciidoc openssh-keygen && \
+  mkdir -p /var/lib/gitea && \
+  groupadd -g 1000 git && \
+  useradd -u 1000 -d /var/lib/gitea -g git -s /bin/bash -M -p '*' git && \
+  rm -rf /var/cache/apk/*
+
+COPY --from=build /srv/app/bin/gitea /usr/bin/gitea
+COPY ./overlay ./overlay-amd64 /

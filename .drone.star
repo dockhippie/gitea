@@ -24,6 +24,10 @@ def main(ctx):
         'path': 'v1.9',
         'tag': '1.9',
       },
+      {
+        'path': 'v1.8',
+        'tag': '1.8',
+      },
     ],
     'trigger': [
 
