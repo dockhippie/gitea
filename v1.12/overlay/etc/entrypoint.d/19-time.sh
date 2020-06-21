@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+declare -x GITEA_TIME_FORMAT
+[[ -z "${GITEA_TIME_FORMAT}" ]] && GITEA_TIME_FORMAT=""
+
+declare -x GITEA_TIME_DEFAULT_UI_LOCATION
+[[ -z "${GITEA_TIME_DEFAULT_UI_LOCATION}" ]] && GITEA_TIME_DEFAULT_UI_LOCATION=""
