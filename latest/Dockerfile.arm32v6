@@ -1,8 +1,8 @@
-FROM webhippie/golang:1.12-arm32v6 as build
+FROM webhippie/golang:1.14-arm32v6 as build
 
 ENV GITEA_PATH code.gitea.io/gitea
 ENV GITEA_REPO https://github.com/go-gitea/gitea.git
-ENV GITEA_BRANCH release/v1.11
+ENV GITEA_BRANCH release/v1.12
 
 RUN apk update && \
   apk upgrade && \
