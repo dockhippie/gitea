@@ -1,4 +1,4 @@
-FROM webhippie/golang:1.14 as build
+FROM webhippie/golang:1.14-amd64 as build
 
 ENV GITEA_PATH code.gitea.io/gitea
 ENV GITEA_REPO https://github.com/go-gitea/gitea.git
