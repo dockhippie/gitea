@@ -1,0 +1,39 @@
+---
+name: readme
+
+"on":
+  push:
+    branches:
+      - master
+    paths:
+      - README.md
+  workflow_dispatch:
+
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Push readme
+        uses: actionhippie/pushrm@v1
+        if: github.event_name != 'pull_request'
+        with:
+          provider: dockerhub
+          target: webhippie/gitea
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          description: Docker image for gitea
+          readme: README.md
+
+      - name: Push readme
+        uses: actionhippie/pushrm@v1
+        with:
+          provider: quay
+          target: quay.io/webhippie/gitea
+          apikey: ${{ secrets.QUAY_APIKEY }}
+          readme: README.md
+
+...
