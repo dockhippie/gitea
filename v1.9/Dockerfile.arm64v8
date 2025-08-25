@@ -1,4 +1,4 @@
-FROM webhippie/golang:1.16-arm64v8 as build
+FROM webhippie/golang:1.16-arm64v8@sha256:3fa40da0e36702fb53dc096daa3c09ec9c81e055414c73f4628f7c8dd07ba0ec as build
 
 ENV GITEA_PATH code.gitea.io/gitea
 ENV GITEA_REPO https://github.com/go-gitea/gitea.git
