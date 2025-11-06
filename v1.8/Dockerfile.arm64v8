@@ -1,4 +1,4 @@
-FROM webhippie/golang:1.16-arm64v8 as build
+FROM webhippie/golang:1.16-arm64v8@sha256:3fa40da0e36702fb53dc096daa3c09ec9c81e055414c73f4628f7c8dd07ba0ec as build
 
 ENV GITEA_PATH code.gitea.io/gitea
 ENV GITEA_REPO https://github.com/go-gitea/gitea.git
@@ -8,7 +8,7 @@ RUN git clone -b ${GITEA_BRANCH} ${GITEA_REPO} /srv/app/src/${GITEA_PATH} && \
   cd /srv/app/src/${GITEA_PATH} && \
   TAGS="bindata sqlite" make generate install
 
-FROM webhippie/alpine:latest-arm64v8
+FROM webhippie/alpine:latest-arm64v8@sha256:5e6d9786e4fc0610d7015b17293051518f681fbed6f3664b57d6375b6946aabd
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Gitea" \
