@@ -8,7 +8,7 @@ RUN git clone -b ${GITEA_BRANCH} ${GITEA_REPO} /srv/app/src/${GITEA_PATH} && \
   cd /srv/app/src/${GITEA_PATH} && \
   TAGS="bindata sqlite" make generate install
 
-FROM webhippie/alpine:latest-amd64@sha256:834be7ffc1914f6bfec751411aa954efee570aaccaa7cfcf21b0e92e264701d7
+FROM webhippie/alpine:latest-amd64@sha256:145b4b266162dc3dbdd2543cebeaf3b99fab5316bfbf47f162477bab76050d6e
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Gitea" \
