@@ -122,7 +122,7 @@ jobs:
 
       - name: Hub manifest
         id: manifest1
-        uses: actionhippie/manifest@b9a6c7fed4717b123ad2b73b678cd9fc3dd7372d # v1
+        uses: actionhippie/manifest@1e7c410f278cbe5165ed8f8e41f4b2d01dffaeef # v1
         if: github.event_name != 'pull_request'
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -134,7 +134,7 @@ jobs:
 
       - name: Quay manifest
         id: manifest2
-        uses: actionhippie/manifest@b9a6c7fed4717b123ad2b73b678cd9fc3dd7372d # v1
+        uses: actionhippie/manifest@1e7c410f278cbe5165ed8f8e41f4b2d01dffaeef # v1
         if: github.event_name != 'pull_request'
         with:
           username: ${{ secrets.QUAY_USERNAME }}
@@ -146,7 +146,7 @@ jobs:
 
       - name: Ghcr manifest
         id: manifest3
-        uses: actionhippie/manifest@b9a6c7fed4717b123ad2b73b678cd9fc3dd7372d # v1
+        uses: actionhippie/manifest@1e7c410f278cbe5165ed8f8e41f4b2d01dffaeef # v1
         if: github.event_name != 'pull_request'
         with:
           username: ${{ github.actor }}
