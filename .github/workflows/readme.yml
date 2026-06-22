@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
 
       - name: Push readme
-        uses: actionhippie/pushrm@c42e7f2e33691c3d2b2ee8ea31960354960422bf # v1
+        uses: actionhippie/pushrm@93fff1b7be1e33f5baea1f92769d03ca73bf322a # v1
         if: github.event_name != 'pull_request'
         with:
           provider: dockerhub
@@ -29,7 +29,7 @@ jobs:
           readme: README.md
 
       - name: Push readme
-        uses: actionhippie/pushrm@c42e7f2e33691c3d2b2ee8ea31960354960422bf # v1
+        uses: actionhippie/pushrm@93fff1b7be1e33f5baea1f92769d03ca73bf322a # v1
         with:
           provider: quay
           target: quay.io/webhippie/gitea
