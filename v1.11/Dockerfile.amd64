@@ -1,4 +1,4 @@
-FROM webhippie/golang:1.27-amd64@sha256:72c7b916af72e36e40921acfce69562f90fdeb770d522783ece0cf51015a0423 as build
+FROM webhippie/golang:1.27-amd64@sha256:cff71f7a784007e2391fc29be09fbc29fbdd6fbe415cae9fed2a8b100e5a17fd as build
 
 ENV GITEA_PATH code.gitea.io/gitea
 ENV GITEA_REPO https://github.com/go-gitea/gitea.git
@@ -11,7 +11,7 @@ RUN apk update && \
   cd /srv/app/src/${GITEA_PATH} && \
   TAGS="bindata sqlite" make build install
 
-FROM webhippie/alpine:latest-amd64@sha256:f74042fd7f00bbdaa91c30b3c2b98d094defd88a4164c41fb20db2e613cbc827
+FROM webhippie/alpine:latest-amd64@sha256:ea1feeff5badc52f4336db1dececa292f2d87e9f30d7457899ed33bb6bd3eab6
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Gitea" \
