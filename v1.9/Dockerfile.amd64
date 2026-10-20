@@ -1,4 +1,4 @@
-FROM webhippie/golang:1.27-amd64@sha256:cff71f7a784007e2391fc29be09fbc29fbdd6fbe415cae9fed2a8b100e5a17fd as build
+FROM webhippie/golang:1.27-amd64@sha256:6c9f77419703d7bb4ad3debb887860ad989c54f201cdac91c04c1d916217893a as build
 
 ENV GITEA_PATH code.gitea.io/gitea
 ENV GITEA_REPO https://github.com/go-gitea/gitea.git
